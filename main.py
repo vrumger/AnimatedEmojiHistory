@@ -4,15 +4,14 @@ import os
 from typing import List
 
 import aiocron
-from telethon import TelegramClient
-from telethon.tl.custom.file import File
-from telethon.tl.functions.messages import GetStickerSetRequest
-from telethon.tl.types import InputStickerSetAnimatedEmoji
-
 from config import api_hash
 from config import api_id
 from config import bot_token
 from config import channel
+from telethon import TelegramClient
+from telethon.tl.custom.file import File
+from telethon.tl.functions.messages import GetStickerSetRequest
+from telethon.tl.types import InputStickerSetAnimatedEmoji
 
 
 client = TelegramClient('bot', api_id, api_hash)
