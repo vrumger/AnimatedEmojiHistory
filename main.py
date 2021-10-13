@@ -8,6 +8,7 @@ from telethon import TelegramClient
 from telethon.tl.custom.file import File
 from telethon.tl.functions.messages import GetStickerSetRequest
 from telethon.tl.types import InputStickerSetAnimatedEmoji
+from telethon.tl.types import InputStickerSetAnimatedEmojiAnimations
 
 from config import api_hash
 from config import api_id
@@ -36,11 +37,17 @@ def save_stickers(stickers: List[str]) -> None:
 @aiocron.crontab('0 */2 * * *')  # every 2 hours
 async def check_stickers() -> None:
     stickers = get_stickers()
-    sticker_set = await client(
+    animated_emojis_set = await client(
         GetStickerSetRequest(InputStickerSetAnimatedEmoji()),
     )
+    emoji_animations_set = await client(
+        GetStickerSetRequest(InputStickerSetAnimatedEmojiAnimations())
+    )
 
-    for document in sticker_set.documents:
+    all_stickers = (
+        animated_emojis_set.documents + emoji_animations_set.documents
+    )
+    for document in all_stickers:
         file = File(document)
         if file.id not in stickers:
             await client.send_message(channel, file.emoji)
