@@ -41,7 +41,7 @@ async def check_stickers() -> None:
         GetStickerSetRequest(InputStickerSetAnimatedEmoji()),
     )
     emoji_animations_set = await client(
-        GetStickerSetRequest(InputStickerSetAnimatedEmojiAnimations())
+        GetStickerSetRequest(InputStickerSetAnimatedEmojiAnimations()),
     )
 
     all_stickers = (
