@@ -9,6 +9,7 @@ from telethon.tl.custom.file import File
 from telethon.tl.functions.messages import GetStickerSetRequest
 from telethon.tl.types import InputStickerSetAnimatedEmoji
 from telethon.tl.types import InputStickerSetAnimatedEmojiAnimations
+from telethon.tl.types import InputStickerSetShortName
 
 from config import api_hash
 from config import api_id
@@ -37,15 +38,20 @@ def save_stickers(stickers: List[str]) -> None:
 @aiocron.crontab('0 */2 * * *')  # every 2 hours
 async def check_stickers() -> None:
     stickers = get_stickers()
-    animated_emojis_set = await client(
+    animated_emojies_set = await client(
         GetStickerSetRequest(InputStickerSetAnimatedEmoji()),
+    )
+    animated_emoji_set = await client(
+        GetStickerSetRequest(InputStickerSetShortName('AnimatedEmoji')),
     )
     emoji_animations_set = await client(
         GetStickerSetRequest(InputStickerSetAnimatedEmojiAnimations()),
     )
 
     all_stickers = (
-        animated_emojis_set.documents + emoji_animations_set.documents
+        animated_emojies_set.documents +
+        animated_emoji_set.documents +
+        emoji_animations_set.documents
     )
     for document in all_stickers:
         file = File(document)
