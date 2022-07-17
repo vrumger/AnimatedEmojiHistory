@@ -29,7 +29,7 @@ def get_stickers() -> List[str]:
 
 
 def save_stickers(stickers: List[str]) -> None:
-    unique_stickers = list(set(stickers))
+    unique_stickers = sorted(list(set(stickers)))
     with open('stickers.json', 'w') as f:
         json.dump(unique_stickers, f, indent=2)
 
