@@ -1,2 +1,2 @@
 aiocron==1.4
-git+git://github.com/AndrewLaneX/Telethon@e63abd40a74a2cb8f19ff5fd52bbb6b3168efb4e
+Telethon==1.24.0
