@@ -41,8 +41,8 @@ async def check_stickers() -> None:
     animated_emojies_set = await client(
         GetStickerSetRequest(InputStickerSetAnimatedEmoji()),
     )
-    animated_emoji_set = await client(
-        GetStickerSetRequest(InputStickerSetShortName('AnimatedEmoji')),
+    premium_set = await client(
+        GetStickerSetRequest(InputStickerSetShortName('TelemojiPremium')),
     )
     emoji_animations_set = await client(
         GetStickerSetRequest(InputStickerSetAnimatedEmojiAnimations()),
@@ -50,7 +50,7 @@ async def check_stickers() -> None:
 
     all_stickers = (
         animated_emojies_set.documents +
-        animated_emoji_set.documents +
+        premium_set.documents +
         emoji_animations_set.documents
     )
     for document in all_stickers:
