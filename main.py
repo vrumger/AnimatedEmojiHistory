@@ -1,26 +1,26 @@
+from __future__ import annotations
+
 import asyncio
 import json
 import os
-from typing import List
 
 import aiocron
+from config import api_hash
+from config import api_id
+from config import bot_token
+from config import channel
 from telethon import TelegramClient
 from telethon.tl.custom.file import File
 from telethon.tl.functions.messages import GetStickerSetRequest
 from telethon.tl.types import InputStickerSetAnimatedEmoji
 from telethon.tl.types import InputStickerSetAnimatedEmojiAnimations
 
-from config import api_hash
-from config import api_id
-from config import bot_token
-from config import channel
-
 
 client = TelegramClient('bot', api_id, api_hash)
 client.start(bot_token=bot_token)
 
 
-def get_stickers() -> List[str]:
+def get_stickers() -> list[str]:
     if os.path.exists('stickers.json'):
         with open('stickers.json', 'r+') as f:
             return json.load(f)
@@ -28,7 +28,7 @@ def get_stickers() -> List[str]:
         return []
 
 
-def save_stickers(stickers: List[str]) -> None:
+def save_stickers(stickers: list[str]) -> None:
     unique_stickers = sorted(list(set(stickers)))
     with open('stickers.json', 'w') as f:
         json.dump(unique_stickers, f, indent=2)
