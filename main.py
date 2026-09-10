@@ -38,10 +38,10 @@ def save_stickers(stickers: list[str]) -> None:
 async def check_stickers() -> None:
     stickers = get_stickers()
     animated_emojis_set = await client(
-        GetStickerSetRequest(InputStickerSetAnimatedEmoji()),
+        GetStickerSetRequest(InputStickerSetAnimatedEmoji(), 0),
     )
     emoji_animations_set = await client(
-        GetStickerSetRequest(InputStickerSetAnimatedEmojiAnimations()),
+        GetStickerSetRequest(InputStickerSetAnimatedEmojiAnimations(), 0),
     )
 
     all_stickers = (
